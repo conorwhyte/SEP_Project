@@ -1,8 +1,7 @@
 import java.io.IOException;
 
-public class TestSA {
+public class TestGA {
 	public static void main(String[] args) throws IOException{
-		SimulatedAnnealling sa = new SimulatedAnnealling();
-	}
+		GeneticAlgorithm ga = new GeneticAlgorithm();
+	}	
 }
-

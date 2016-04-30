@@ -17,6 +17,7 @@ public class PreferenceTable {
 		setupStudents();
 	}
 
+
 	/* Gets vector from LoadContentsFromFile and Creates StudentEntry for each Student */
 	public void setupStudents() throws IOException {
 		Vector<Vector> students = loadContentFromFile("tabfile.txt");

@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class CandidateSolution {
@@ -6,9 +7,15 @@ public class CandidateSolution {
 	static final int standardPenalty = 1000;
 	private CandidateAssignment lastChanged;
 	
-	public CandidateSolution(PreferenceTable prefs) {
-		table = prefs;
-		createCandidateAssignments();
+	public CandidateSolution(boolean bool) throws IOException {
+		table = new PreferenceTable("tabfile.txt");
+		if(bool) {
+			createCandidateAssignments();
+		}	
+	}
+	
+	public void setAssignment(StudentEntry se, CandidateAssignment ca) {
+		assignments.put(se,ca);
 	}
 	
 	private void createCandidateAssignments() {
@@ -35,6 +42,15 @@ public class CandidateSolution {
 	
 	public CandidateAssignment getAssignmentFor(StudentEntry student) {
 		return assignments.get(student);
+	}
+	
+	public CandidateAssignment getAssignmentForName(String name) {
+		 for (StudentEntry key: assignments.keySet()) {
+			   if(key.getStudentName().equals(name)) {
+				   return assignments.get(key);
+			   } 
+		 }
+		 return lastChanged; 
 	}
 	
 	public CandidateAssignment getRandomAssignment() {

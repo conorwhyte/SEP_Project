@@ -61,12 +61,12 @@ public class TestClass {
 			
 		
 			System.out.println("\n\nWEEK 5 TESTS Prints Student and there random Assignment: ------------------\n");
-			CandidateSolution cs = new CandidateSolution(table);
+			CandidateSolution cs = new CandidateSolution(true);
 			cs.printSolution();
 	
-			CandidateSolution best = new CandidateSolution(table);
+			CandidateSolution best = new CandidateSolution(true);
 			for(int i =0; i<500; i++) {
-				CandidateSolution newSolution = new CandidateSolution(table);
+				CandidateSolution newSolution = new CandidateSolution(true);
 				if (newSolution.getEnergy() < best.getEnergy() ) {
 					best = newSolution;
 				}
