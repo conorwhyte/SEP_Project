@@ -28,28 +28,16 @@ public class CandidateSolution {
 	    	assignments.put(entry, assignment);
 	    } 
 	}
-
-	public StudentEntry[] allStudents(){
-		StudentEntry[] array = new StudentEntry[assignments.size()];
-		int i = 0 ; 
-		for (StudentEntry e : assignments.keySet()){
-			//System.out.println(e); 
-			array[i] = e ; 
-			i++ ; 
-		}
-		return array ; 
+	
+	public void GAChange() {
+		 Object[] keys = assignments.keySet().toArray();
+	     Object key = keys[new Random().nextInt(keys.length)];
+	     CandidateAssignment ca;
+	     ca = assignments.get(key);
+	    // System.out.println("MUTATED");
+	     ca.randomizeAssignment();
 	}
 	
-	
-	public CandidateSolution mergeSolutions(CandidateSolution firstSol,CandidateSolution secondSol){
-		for (int i =0 ; i < 26  ; i++ ){
-			firstSol.replaceAssignment(allStudents()[i], secondSol.getAssignmentFor(allStudents()[i]), firstSol);
-		}
-		/*for (int i= 26 ; i< 52 ;i++){
-			firstSol.replaceAssignment(allStudents()[i], secondSol.getAssignmentFor(allStudents()[i]), firstSol);
-		}*/
-		return firstSol ; 
-	}
 	
 	public void makeChange() {
 		CandidateAssignment ca;
@@ -66,7 +54,6 @@ public class CandidateSolution {
 		return assignments.get(student);
 	}
 	
-
 	public CandidateAssignment getAssignmentForName(String name) {
 		 for (StudentEntry key: assignments.keySet()) {
 			   if(key.getStudentName().equals(name)) {
@@ -75,9 +62,9 @@ public class CandidateSolution {
 		 }
 		 return lastChanged; 
 	}
+	
 	public void replaceAssignment(StudentEntry student, CandidateAssignment newCa, CandidateSolution newSol) {
-		newSol.assignments.replace(student, newCa);
-
+		assignments.replace(student, newCa);
 	}
 	
 	public CandidateAssignment getRandomAssignment() {

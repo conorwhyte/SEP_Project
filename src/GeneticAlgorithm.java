@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class GeneticAlgorithm {
 	private Population pop = null;
-	private int popSize = 1000;
+	private int popSize = 140;
 	
 	CandidateSolution bestSolution = new CandidateSolution(false);
 	
@@ -14,14 +14,26 @@ public class GeneticAlgorithm {
 	
 	public CandidateSolution runAlgrithm() throws IOException {
 		int t = 0;
-		int idealScore = 100;
-		
+		int currentEnergy, bestEnergy;
+		currentEnergy = 1;
+		bestEnergy = 100000;
+		int count =0;
 		while((pop.getFittest().getEnergy() > 200) || t < 2 ) {
+			count++;
 			for (int i=0; i < (popSize / 2) -2; i++) {
 				pop.crossover();
 			}
-			//pop.mutate();
-			System.out.println(pop.getFittest().getEnergy());
+			if(count == 150) {
+				pop.mutate();
+			}
+			
+			System.out.println("Generation: "+ t + " Energy: " + pop.getFittest().getEnergy());
+			currentEnergy = pop.getFittest().getEnergy();
+			if(currentEnergy != bestEnergy) {
+				count = 0;
+				bestEnergy = currentEnergy;
+			}
+		
 			pop.selectParents();
 			t++;
 		}

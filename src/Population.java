@@ -10,7 +10,7 @@ public class Population {
 	private ArrayList<CandidateSolution> solutions = new ArrayList();
 	private ArrayList<CandidateSolution> parents =  new ArrayList();
 	private int populationSize;
-	private double mutationRate = 0.05;
+	private double mutationRate = 0.001;
 	
 	public Population(int size) throws IOException {
 		populationSize = size;
@@ -65,12 +65,8 @@ public class Population {
 	}
 	
 	public void mutate() {
-		Random m_rand = new Random();
-		if( m_rand.nextDouble() < mutationRate) {
 			CandidateSolution cs1 = getRandomSolution();
-			cs1.printSolution();
-			cs1.makeChange();
-		}
+			cs1.GAChange();
 	}
 	
 	public void crossover() throws IOException {
@@ -86,7 +82,6 @@ public class Population {
 	    StudentEntry entry; 
 	    while(e.hasMoreElements()) {
 	    	entry = e.nextElement();
-	    	//System.out.println(entry.getStudentName());
 			if(count < randomNum) {
 				csNew.setAssignment(entry, cs1.getAssignmentForName(entry.getStudentName()));
 			} else {
@@ -94,7 +89,8 @@ public class Population {
 			}
 			count++;
 		}
-	    //System.out.println("CS1: " + cs1.getEnergy() + " CS2: " + cs2.getEnergy() + " New: "+ csNew.getEnergy() + " count: " + count + " random num: " + randomNum);
+	   //System.out.println("CS1: " + cs1.getEnergy() + " CS2: " + cs2.getEnergy() + " New: "+ csNew.getEnergy() + " count: " + count + " random num: " + randomNum);
+	   
 	    solutions.add(csNew);
 	}
 }
