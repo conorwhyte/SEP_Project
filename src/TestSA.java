@@ -15,13 +15,13 @@ public class TestSA {
 		CandidateSolution cs = new CandidateSolution(table);
 		CandidateSolution bestSolution = new CandidateSolution(table);
         System.out.println("Initial solution: " + cs.getEnergy());
-        double temp = 1000000;
+        double temp = 10000;
         double coolingRate = 0.0003;
         int  bestEnergy = cs.getEnergy();
        
         // Loop until system has cooled
-        while (temp > 1) {
-            // Create new neighbour 
+       /* while (temp > 1) {
+            // Creates new neighbour 
         	cs.makeChange();
         	
         	if(acceptanceProbability(bestEnergy, cs.getEnergy(), temp) > Math.random() ) {
@@ -30,11 +30,30 @@ public class TestSA {
         	} else {
         		cs.undoChange();
         	}
-        }
-        bestSolution.printSolution(); 
+        }*/
+        //bestSolution.printSolution(); 
         
         //Genetic Algoritms 
-
+        int i = 0 ; 
+        while (i < 100000){
+        	CandidateSolution newCs = new CandidateSolution(table);
+        
+        	//CandidateSolution child = cs ; 
+        	//child.mergeSolutions(child, newCs); 	//creates the childs
+      
+        	
+        		cs.mergeSolutions(cs, newCs);
+        		bestEnergy = cs.getEnergy();
+        		cs.makeChange();
+        		
+        		if (cs.getEnergy() > bestEnergy){
+        			cs.undoChange();
+        		}
+        	
+        	
+        	i++ ; 
+        }
+    	
         System.out.println("Final solution Energy: " + bestEnergy);
         //cs.printSolution();
        // cs.printPreferences();
