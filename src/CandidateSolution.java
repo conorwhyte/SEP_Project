@@ -6,9 +6,9 @@ public class CandidateSolution {
 	private Hashtable<StudentEntry, CandidateAssignment> assignments = new Hashtable<StudentEntry, CandidateAssignment>();
 	static final int standardPenalty = 1000;
 	private CandidateAssignment lastChanged;
-	
-	public CandidateSolution(boolean bool) throws IOException {
-		table = new PreferenceTable("tabfile.txt");
+	String filename = "";
+	public CandidateSolution(boolean bool, String filename) throws IOException {
+		table = new PreferenceTable(filename);
 		if(bool) {
 			createCandidateAssignments();
 		}	
@@ -68,15 +68,20 @@ public class CandidateSolution {
 		return getAssignmentFor(table.getRandomStudent());
 	}
 	
-	public void printSolution() {
+	public String[][] printSolution() {
 		Enumeration<StudentEntry> enumKey = assignments.keys();
+		String[][] data = new String[100][100];
 		System.out.println(assignments.size());
+		int i = 0;
 		while(enumKey.hasMoreElements()) {
 		    StudentEntry key = enumKey.nextElement();
 		    CandidateAssignment val = assignments.get(key);
+		    data[i][0] = key.getStudentName();
+		    data[i][1] = val.getAssignedProject();
 		    System.out.println("Student: " + key.getStudentName());
 		    System.out.println("Assignemt: " + val.getAssignedProject() + "\n");
 		}
+		return data;
 	}
 	
 	public int getFitness() {

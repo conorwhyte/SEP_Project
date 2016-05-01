@@ -3,12 +3,14 @@ import java.io.IOException;
 public class GeneticAlgorithm {
 	private Population pop = null;
 	private int popSize = 140;
+	String filename = "";
+	CandidateSolution bestSolution = null;
 	
-	CandidateSolution bestSolution = new CandidateSolution(false);
-	
-	public GeneticAlgorithm() throws IOException {
-		pop = new Population(popSize);
+	public GeneticAlgorithm(String fileName) throws IOException {
+		pop = new Population(popSize,fileName);
 		bestSolution = runAlgrithm();
+		filename = fileName;
+		bestSolution = new CandidateSolution(false, filename);
 	}
 	
 	public CandidateSolution runAlgrithm() throws IOException {

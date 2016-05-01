@@ -10,17 +10,16 @@ public class PreferenceTable {
 	private	Hashtable<String, StudentEntry> studentLookup =	new	Hashtable();
 
 	public PreferenceTable() {
-		
 	}
 	
 	public PreferenceTable(String fileName) throws IOException {
-		setupStudents();
+		setupStudents(fileName);
 	}
 
 
 	/* Gets vector from LoadContentsFromFile and Creates StudentEntry for each Student */
-	public void setupStudents() throws IOException {
-		Vector<Vector> students = loadContentFromFile("tabfile.txt");
+	public void setupStudents(String filename) throws IOException {
+		Vector<Vector> students = loadContentFromFile(filename);
 		for (Vector person : students)		// For each vector in Vector of Vectors
 		{
 			StudentEntry student = new StudentEntry();			
