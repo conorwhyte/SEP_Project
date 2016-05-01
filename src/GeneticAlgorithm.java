@@ -18,7 +18,10 @@ public class GeneticAlgorithm {
 		int currentEnergy, bestEnergy;
 		currentEnergy = 1;
 		bestEnergy = 100000;
-		while((pop.getFittest().getEnergy() > 00) || t < 2 ) {
+		boolean flag = false;
+		int counter = 0;
+		int temp = 0;
+		while(!flag || t < 2 ) {
 			for (int i=0; i < (popSize / 2 ) -2; i++) {
 				pop.crossover();
 			}
@@ -27,7 +30,16 @@ public class GeneticAlgorithm {
 			} */
 			System.out.println("Generation: "+ t + " Energy: " + pop.getFittest().getEnergy());
 			currentEnergy = pop.getFittest().getEnergy();
-
+			if(pop.getFittest().getEnergy() == temp){
+				counter++;
+			}
+			else{
+				counter = 0;
+				temp = pop.getFittest().getEnergy();
+			}
+			if(counter > 250){
+				flag = true;
+			}
 			pop.selectParents();
 			t++;
 		}
