@@ -8,7 +8,6 @@ public class GeneticAlgorithm {
 	
 	public GeneticAlgorithm() throws IOException {
 		pop = new Population(popSize);
-		System.out.println(pop.getFittest().getEnergy());
 		bestSolution = runAlgrithm();
 	}
 	
@@ -17,22 +16,15 @@ public class GeneticAlgorithm {
 		int currentEnergy, bestEnergy;
 		currentEnergy = 1;
 		bestEnergy = 100000;
-		int count =0;
-		while((pop.getFittest().getEnergy() > 200) || t < 2 ) {
-			count++;
-			for (int i=0; i < (popSize / 2) -2; i++) {
+		while((pop.getFittest().getEnergy() > 00) || t < 2 ) {
+			for (int i=0; i < (popSize / 2 ) -2; i++) {
 				pop.crossover();
 			}
-			if(count == 150) {
+			/*if(count == 150) {
 				pop.mutate();
-			}
-			
+			} */
 			System.out.println("Generation: "+ t + " Energy: " + pop.getFittest().getEnergy());
 			currentEnergy = pop.getFittest().getEnergy();
-			if(currentEnergy != bestEnergy) {
-				count = 0;
-				bestEnergy = currentEnergy;
-			}
 		
 			pop.selectParents();
 			t++;

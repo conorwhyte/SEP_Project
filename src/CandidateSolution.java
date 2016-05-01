@@ -34,7 +34,7 @@ public class CandidateSolution {
 	     Object key = keys[new Random().nextInt(keys.length)];
 	     CandidateAssignment ca;
 	     ca = assignments.get(key);
-	    // System.out.println("MUTATED");
+	    // System.out.print("MUTATED");
 	     ca.randomizeAssignment();
 	}
 	

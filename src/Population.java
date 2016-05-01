@@ -10,6 +10,8 @@ public class Population {
 	private ArrayList<CandidateSolution> solutions = new ArrayList();
 	private ArrayList<CandidateSolution> parents =  new ArrayList();
 	private int populationSize;
+	private Random rand = new Random();
+	
 	private double mutationRate = 0.001;
 	
 	public Population(int size) throws IOException {
@@ -33,16 +35,15 @@ public class Population {
 	
 	public void selectParents() {
 		sortSolutions();
-		int x = solutions.size()/2 + (solutions.size()%2) - 1;
-		for(int i = 0; i < x; i++){
+		System.out.println(solutions.size());
+		for(int i = 0; i < 100; i++){
 		    parents.add(solutions.get(i));
 		 }
 		removeOthers();
 	}
 	
 	private void removeOthers() {
-		int x = solutions.size()/2 + (solutions.size()%2) - 1;
-		for(int i = solutions.size()-1; i > x; i--){
+		for(int i = solutions.size()-1; i > 100; i--){
 		    solutions.remove(i);
 		 }
 	}
@@ -73,7 +74,6 @@ public class Population {
 		CandidateSolution cs1 = getRandomParent();
 		CandidateSolution cs2 = getRandomParent();
 		CandidateSolution csNew = new CandidateSolution(false);
-		Random rand = new Random();
 		int randomNum = rand.nextInt((51 - 0)) + 0;
 		PreferenceTable table = new PreferenceTable("tabfile.txt");
 		int count = 0;
