@@ -28,19 +28,12 @@ public class SimulatedAnnealling {
 	    		cs.undoChange();
 	    	}
 	    }
-<<<<<<< HEAD
-	    cs.printSolution(); 
-	    System.out.println("Final solution Energy: " + bestEnergy);
-=======
+
 	    data = cs.printSolution(); 
-	    
-	    //Genetic Algoritms 
+	   
 
 	    System.out.println("Final solution Energy: " + bestEnergy);
-	    //cs.printSolution();
-	   // cs.printPreferences();
-	   
->>>>>>> b5532bc07411cad76471d7c7b86d966ad869aaa5
+
 	}
 	
 	public static double acceptanceProbability(int energy, int newEnergy, double temperature) {
