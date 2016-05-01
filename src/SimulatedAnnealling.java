@@ -3,7 +3,6 @@ import java.io.IOException;
 public class SimulatedAnnealling {
 	
 	private CandidateSolution cs;
-	private CandidateSolution bestSolution;
 	private double temp = 1000000;
     private double coolingRate = 0.0001;
 	
@@ -13,11 +12,9 @@ public class SimulatedAnnealling {
 	    System.out.println("Initial solution: " + cs.getEnergy());
 	    runAlgorithm();
 	}
-	
 
 	public void runAlgorithm() {
 		int  bestEnergy = cs.getEnergy();
-		   
 	    // Loop until system has cooled
 	    while (temp > 1) {
 	        // Create new neighbour 
@@ -31,12 +28,7 @@ public class SimulatedAnnealling {
 	    	}
 	    }
 	    cs.printSolution(); 
-	    
-	    //Genetic Algoritms 
-
 	    System.out.println("Final solution Energy: " + bestEnergy);
-	    //cs.printSolution();
-	   // cs.printPreferences();
 	}
 	
 	public static double acceptanceProbability(int energy, int newEnergy, double temperature) {

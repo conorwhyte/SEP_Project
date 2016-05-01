@@ -60,12 +60,9 @@ public class CandidateSolution {
 				   return assignments.get(key);
 			   } 
 		 }
-		 return lastChanged; 
+		 return lastChanged;  // Should never reach here.
 	}
 	
-	public void replaceAssignment(StudentEntry student, CandidateAssignment newCa, CandidateSolution newSol) {
-		assignments.replace(student, newCa);
-	}
 	
 	public CandidateAssignment getRandomAssignment() {
 		return getAssignmentFor(table.getRandomStudent());
