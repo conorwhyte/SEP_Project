@@ -9,13 +9,9 @@ public class PreferenceTable {
 	private Random random = new Random();
 	private	Hashtable<String, StudentEntry> studentLookup =	new	Hashtable();
 
-	public PreferenceTable() {
-	}
-	
 	public PreferenceTable(String fileName) throws IOException {
 		setupStudents(fileName);
 	}
-
 
 	/* Gets vector from LoadContentsFromFile and Creates StudentEntry for each Student */
 	public void setupStudents(String filename) throws IOException {
@@ -53,12 +49,11 @@ public class PreferenceTable {
 	
 	public StudentEntry getRandomStudent() {
 		List<String> names = new ArrayList<String>();
-		for (String key : studentLookup.keySet()) {
-			   names.add(key);
-			}
-		int index = random.nextInt(names.size());
-		String name = names.get(index);
-
+			for (String key : studentLookup.keySet()) {
+				   names.add(key);
+				}
+			int index = random.nextInt(names.size());
+			String name = names.get(index);
 		return studentLookup.get(name);
 	}
 	

@@ -2,20 +2,18 @@ import java.io.IOException;
 import java.util.*;
 
 public class CandidateSolution {
+	
 	private PreferenceTable table; 
 	private Hashtable<StudentEntry, CandidateAssignment> assignments = new Hashtable<StudentEntry, CandidateAssignment>();
 	static final int standardPenalty = 1000;
 	private CandidateAssignment lastChanged;
 	String filename = "";
+	
 	public CandidateSolution(boolean bool, String filename) throws IOException {
 		table = new PreferenceTable(filename);
-		if(bool) {
+		if(bool) {		// Only initialise solution with assignments if boolean is set to true.
 			createCandidateAssignments();
 		}	
-	}
-	
-	public void setAssignment(StudentEntry se, CandidateAssignment ca) {
-		assignments.put(se,ca);
 	}
 	
 	private void createCandidateAssignments() {
@@ -28,28 +26,7 @@ public class CandidateSolution {
 	    	assignments.put(entry, assignment);
 	    } 
 	}
-	
-	public void GAChange() {
-		 Object[] keys = assignments.keySet().toArray();
-	     Object key = keys[new Random().nextInt(keys.length)];
-	     CandidateAssignment ca;
-	     ca = assignments.get(key);
-	    // System.out.print("MUTATED");
-	     ca.randomizeAssignment();
-	}
-	
-	
-	public void makeChange() {
-		CandidateAssignment ca;
-		ca = getRandomAssignment();
-		lastChanged = ca;
-		ca.randomizeAssignment();
-	}
-	
-	public void undoChange() {
-		lastChanged.undoChange();
-	}
-	
+
 	public CandidateAssignment getAssignmentFor(StudentEntry student) {
 		return assignments.get(student);
 	}
@@ -63,26 +40,11 @@ public class CandidateSolution {
 		 return lastChanged;  // Should never reach here.
 	}
 	
-	
 	public CandidateAssignment getRandomAssignment() {
 		return getAssignmentFor(table.getRandomStudent());
 	}
-	
-	public String[][] printSolution() {
-		Enumeration<StudentEntry> enumKey = assignments.keys();
-		String[][] data = new String[100][100];
-		System.out.println(assignments.size());
-		int i = 0;
-		while(enumKey.hasMoreElements()) {
-		    StudentEntry key = enumKey.nextElement();
-		    CandidateAssignment val = assignments.get(key);
-		    data[i][0] = key.getStudentName();
-		    data[i][1] = val.getAssignedProject();
-		    System.out.println("Student: " + key.getStudentName());
-		    System.out.println("Assignemt: " + val.getAssignedProject() + "\n");
-		}
-		return data;
-	}
+
+	/*These Methods are used to calculate energy and fitness */
 	
 	public int getFitness() {
 		return getEnergy() * -1;
@@ -116,6 +78,35 @@ public class CandidateSolution {
 		return totalPenalties;
 	}
 	
+	/* Methods here are used to manipulate the candidate solution for GA and SA */
+	
+	public void setAssignment(StudentEntry se, CandidateAssignment ca) {
+		assignments.put(se,ca);
+	}
+	
+	public void GAChange() {
+		 Object[] keys = assignments.keySet().toArray();
+	     Object key = keys[new Random().nextInt(keys.length)];
+	     CandidateAssignment ca;
+	     ca = assignments.get(key);
+	    // System.out.print("MUTATED");
+	     ca.randomizeAssignment();
+	}
+	
+	
+	public void makeChange() {
+		CandidateAssignment ca;
+		ca = getRandomAssignment();
+		lastChanged = ca;
+		ca.randomizeAssignment();
+	}
+	
+	public void undoChange() {
+		lastChanged.undoChange();
+	}
+	
+	/* Methods used to print */
+	
 	public void printPreferences() {
 		int first, second,third, fourth, fifth, sixth, seventh, eighth, ninth, tenth;
 	    first = second  = third = fourth = fifth = sixth = seventh = eighth = ninth = tenth =0;
@@ -137,5 +128,21 @@ public class CandidateSolution {
 			}
 		}
 		System.out.println("first Preferences awarded: " + first + "\nSecond Preferences awarded: " + second + "\nThird Preferences awarded: " + third + "\nFourth Preferences awarded: " + fourth + "\nFifth Preferences awarded: " + fifth + "\nSixth Preferences awarded: " + sixth + "\nSeventh Preferences awarded: " + seventh + "\nEight Preferences awarded: " + eighth + "\nNinth Preferences awarded: " + ninth + "\nTenth Preferences awarded: " + tenth);
+	}
+	
+	public String[][] printSolution() {
+		Enumeration<StudentEntry> enumKey = assignments.keys();
+		String[][] data = new String[100][100];
+		System.out.println(assignments.size());
+		int i = 0;
+		while(enumKey.hasMoreElements()) {
+		    StudentEntry key = enumKey.nextElement();
+		    CandidateAssignment val = assignments.get(key);
+		    data[i][0] = key.getStudentName();
+		    data[i][1] = val.getAssignedProject();
+		    System.out.println("Student: " + key.getStudentName());
+		    System.out.println("Assignemt: " + val.getAssignedProject() + "\n");
+		}
+		return data;
 	}
 }

@@ -27,7 +27,7 @@ public class GeneticAlgorithm {
 			} */
 			System.out.println("Generation: "+ t + " Energy: " + pop.getFittest().getEnergy());
 			currentEnergy = pop.getFittest().getEnergy();
-		
+
 			pop.selectParents();
 			t++;
 		}

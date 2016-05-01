@@ -10,9 +10,6 @@ public class StudentEntry {
 	private int statedProjects;
 	private Random random = new Random();
 	
-	public StudentEntry() {
-		
-	}
 	
 	public void setName(String sname) {
 		name = sname;
