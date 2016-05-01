@@ -61,12 +61,12 @@ public class TestClass {
 			
 		
 			System.out.println("\n\nWEEK 5 TESTS Prints Student and there random Assignment: ------------------\n");
-			CandidateSolution cs = new CandidateSolution(true);
+			CandidateSolution cs = new CandidateSolution(true,"tabfile.txt");
 			cs.printSolution();
 	
-			CandidateSolution best = new CandidateSolution(true);
+			CandidateSolution best = new CandidateSolution(true,"tabfile.txt");
 			for(int i =0; i<500; i++) {
-				CandidateSolution newSolution = new CandidateSolution(true);
+				CandidateSolution newSolution = new CandidateSolution(true,"tabfile.txt");
 				if (newSolution.getEnergy() < best.getEnergy() ) {
 					best = newSolution;
 				}

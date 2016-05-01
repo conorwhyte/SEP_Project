@@ -6,9 +6,10 @@ public class SimulatedAnnealling {
 	private CandidateSolution bestSolution;
 	private double temp = 1000000;
     private double coolingRate = 0.0001;
-	
-	public SimulatedAnnealling() throws IOException {
-		cs = new CandidateSolution(true);
+	private String[][] data = new String[100][100];
+    
+	public SimulatedAnnealling(String filename) throws IOException {
+		cs = new CandidateSolution(true, filename);
 		//bestSolution = new CandidateSolution(true);
 	    System.out.println("Initial solution: " + cs.getEnergy());
 	    runAlgorithm();
@@ -30,13 +31,14 @@ public class SimulatedAnnealling {
 	    		cs.undoChange();
 	    	}
 	    }
-	    cs.printSolution(); 
+	    data = cs.printSolution(); 
 	    
 	    //Genetic Algoritms 
 
 	    System.out.println("Final solution Energy: " + bestEnergy);
 	    //cs.printSolution();
 	   // cs.printPreferences();
+	   
 	}
 	
 	public static double acceptanceProbability(int energy, int newEnergy, double temperature) {
@@ -47,4 +49,7 @@ public class SimulatedAnnealling {
         // If the new solution is worse, calculate an acceptance probability
         return Math.exp((energy - newEnergy) / temperature);
     }
+	public String[][] getData(){
+		return data;
+	}
 }

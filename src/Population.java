@@ -11,19 +11,20 @@ public class Population {
 	private ArrayList<CandidateSolution> parents =  new ArrayList();
 	private int populationSize;
 	private Random rand = new Random();
-	
+	private String fileName = "";
 	private double mutationRate = 0.001;
 	
-	public Population(int size) throws IOException {
+	public Population(int size, String filename) throws IOException {
 		populationSize = size;
+		fileName = filename;
 		initiliazePopulation();
 		selectParents();
 	}
 	
 	private void initiliazePopulation() throws IOException {
-		CandidateSolution s = new CandidateSolution(true);
+		CandidateSolution s = new CandidateSolution(true,fileName);
 		for(int i=0; i<populationSize; i++) {
-			s = new CandidateSolution(true);
+			s = new CandidateSolution(true,fileName);
 			solutions.add(s);
 		}
 	}
@@ -73,7 +74,7 @@ public class Population {
 	public void crossover() throws IOException {
 		CandidateSolution cs1 = getRandomParent();
 		CandidateSolution cs2 = getRandomParent();
-		CandidateSolution csNew = new CandidateSolution(false);
+		CandidateSolution csNew = new CandidateSolution(false, fileName);
 		int randomNum = rand.nextInt((51 - 0)) + 0;
 		PreferenceTable table = new PreferenceTable("tabfile.txt");
 		int count = 0;
